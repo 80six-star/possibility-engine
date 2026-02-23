@@ -1,1 +1,71 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Possibility Engine</title><style>body{margin:0;background:#05080F;color:#E6ECFF;font-family:system-ui}.wrap{max-width:1000px;margin:0 auto;padding:40px 20px}h1{letter-spacing:3px}textarea,input{width:100%;padding:12px;background:#0B1224;color:#E6ECFF;border:1px solid #1E2A4A;border-radius:8px;margin-top:10px;font-family:system-ui;font-size:14px;box-sizing:border-box}button{margin-top:15px;padding:12px 20px;border-radius:10px;border:1px solid #3C5BFF;background:#132A9E;color:white;font-weight:700;cursor:pointer;font-size:14px}button:hover{background:#1E3FBF;border-color:#5A7FFF}.card{margin-top:30px;padding:20px;border:1px solid #1E2A4A;border-radius:14px;background:#0B1224}.metric{color:#7CA9FF;font-weight:700}</style></head><body><div class="wrap"><h1>THE POSSIBILITY ENGINE</h1><p>Identity + Idea + Future Simulation System</p><input id="identity" placeholder="Your name or username"><textarea id="idea" placeholder="Describe your idea..."></textarea><textarea id="decision" placeholder="Describe a major decision you are facing..."></textarea><button onclick="run()">Simulate Future Trajectories</button><div id="output"></div></div><script>function hash(str){let h=0;for(let i=0;i<str.length;i++){h=(h<<5)-h+str.charCodeAt(i);h|=0;}return Math.abs(h);}function run(){const identity=document.getElementById("identity").value.trim();const idea=document.getElementById("idea").value.trim();const decision=document.getElementById("decision").value.trim();if(!identity||!idea||!decision){alert("Please fill in all three fields!");return;}const seed=hash(identity+idea+decision);const identityVector=seed%100;const novelty=(hash(idea)%80)+20;const alignment=(hash(idea+identity)%70)+30;const risk=(hash(decision)%60)+20;const futures=["High volatility growth path with accelerated learning curves.","Stable incremental expansion with moderate impact.","Disruptive breakthrough followed by systemic resistance.","Exponential adoption phase with market leadership.","Niche consolidation with loyal community building."];const future=futures[seed%futures.length];const leverage=["Increase constraint discipline.","Expand cross-domain synthesis.","Reduce narrative complexity.","Commit to asymmetric execution.","Build strategic alliances.","Focus on core differentiation."];const lever=leverage[(seed>>2)%leverage.length];document.getElementById("output").innerHTML=`<div class=\"card\"><p><span class=\"metric\">Identity Coherence:</span> ${identityVector}%</p><p><span class=\"metric\">Idea Originality:</span> ${novelty}%</p><p><span class=\"metric\">Global Narrative Alignment:</span> ${alignment}%</p><p><span class=\"metric\">Risk Surface:</span> ${risk}%</p><hr style=\"border:none;border-top:1px solid #1E2A4A;margin:15px 0;\"><p><span class=\"metric\">Projected 5-Year Trajectory:</span> ${future}</p><p><span class=\"metric\">Strategic Lever Recommendation:</span> ${lever}</p></div>`;}document.addEventListener('DOMContentLoaded', function(){document.getElementById("decision").addEventListener('keypress', function(e){if(e.key === 'Enter' && !e.shiftKey){e.preventDefault();run();}});});</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Possibility Engine</title>
+    <style>
+        body {
+            background-color: #05080F;
+            color: #E6ECFF;
+        }
+        .result-card {
+            border: 1px solid #E6ECFF;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>The Possibility Engine</h1>
+    <label for="identity">Identity:</label>
+    <input type="text" id="identity" placeholder="Enter your identity">
+    <br><br>
+    <label for="idea">Idea:</label>
+    <textarea id="idea" placeholder="Enter your idea"></textarea>
+    <br><br>
+    <label for="decision">Decision:</label>
+    <textarea id="decision" placeholder="Enter your decision"></textarea>
+    <br><br>
+    <button onclick="run()">Run</button>
+    <div id="result" class="result-card" style="display:none;"></div>
+
+    <script>
+        function hash(string) {
+            let hash = 0;
+            for (let i = 0; i < string.length; i++) {
+                hash = (hash << 5) - hash + string.charCodeAt(i);
+                hash = hash | 0; // Convert to 32bit integer
+            }
+            return hash;
+        }
+
+        function run() {
+            const identity = document.getElementById('identity').value;
+            const idea = document.getElementById('idea').value;
+            const decision = document.getElementById('decision').value;
+            
+            if (!identity || !idea || !decision) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            const coherence = hash(identity + idea) % 100;
+            const novelty = hash(idea + decision) % 100;
+            const alignment = hash(identity + decision) % 100;
+            const risk = 100 - (coherence + novelty + alignment) / 3;
+
+            const possibleFutures = ['Future A', 'Future B', 'Future C'];
+            const strategicLevers = ['Leverage A', 'Leverage B', 'Leverage C'];
+
+            const selectedFuture = possibleFutures[Math.floor(Math.random() * possibleFutures.length)];
+            const selectedLever = strategicLevers[Math.floor(Math.random() * strategicLevers.length)];
+
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').innerHTML = `\n                <h2>Results</h2>\n                <p>Coherence: ${coherence}%</p>\n                <p>Novelty: ${novelty}%</p>\n                <p>Alignment: ${alignment}%</p>\n                <p>Risk: ${risk}%</p>\n                <p>Selected Future: ${selectedFuture}</p>\n                <p>Strategic Lever: ${selectedLever}</p>\n            `;
+        }
+    </script>
+</body>
+</html>
